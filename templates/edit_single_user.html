@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PJBL2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='edit_single_user.css') }}">
+</head>
+<body>
+<form method="POST"  action="http://localhost:8084/registrarSensorAtuador" class="formulario">
+
+    <h2>Editar Usuário</h2>
+
+
+    <label for="1">Novo Nome</label>
+    <input id="1" type="text" name="newUsername" placeholder="Nome:" value="{{username}}">
+
+    <label for="0">Nova Senha</label>
+    <input type="text" name="newPassword" id="0" placeholder="Senha:">
+
+
+
+    <input type="submit" value="Atualizar Usuário">
+</form>
+</body>
+</html>

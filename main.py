@@ -40,5 +40,27 @@ def validated_user():
 def home():
     return render_template('home.html')
 
+@app.route('/edit_user')
+def edit_user():
+    return render_template('edit_user.html', users=users)
+
+@app.route('/edit_user/<username>')
+def edit_single_user(username):
+    return render_template('edit_single_user.html', username=username)
+
+@app.route('/update_user')
+def update_user(username, newUsername, newPassword):
+    if username in users:
+        users[username] == newUsername
+
+@app.route('/delete_user/<username>')
+def delete_user(username):
+    if username in users:
+        del users[username]
+        flash(f'Usuário {username} excluído com sucesso!!', 'success')
+    else:
+        flash('Usuário não encontrado.', 'error')
+    return redirect(url_for('edit_user'))
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8084, debug=True)

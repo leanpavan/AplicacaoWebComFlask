@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f2f2f2;
+}
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+.action-buttons {
+    display: flex;
+    gap: 5px;
+}
+.button {
+    padding: 5px 10px;
+    text-decoration: none;
+    border-radius: 4px;
+}
+.edit {
+    background-color: #4CAF50;
+    color: white;
+}
+.delete {
+    background-color: #f44336;
+    color: white;
+}
+.add-user {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 15px;
+    background-color: #2196F3;
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
