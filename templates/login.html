@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="form-login">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="http://localhost:8084/validated_user" method="post">
+            <p>Login</p>
+
+            <label for="username">Nome de Usuário</label> <br>
+            <input type="text" name="username" id="username" placeholder="Usuário"
+                   value="{{ remembered_user if remembered_user else '' }}" required> <br>
+
+            <label for="password">Senha</label> <br>
+            <input type="password" name="password" id="password" placeholder="Senha" required> <br>
+
+            <div class="remember-me">
+                <input type="checkbox" name="remember_me" id="rememberMe">
+                <label for="rememberMe">Lembrar de mim</label>
+            </div>
+
+            <input type="submit" value="Entrar">
+        </form>
+    </div>
+</body>
+</html>
