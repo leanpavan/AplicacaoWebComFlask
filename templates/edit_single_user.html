@@ -6,16 +6,17 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='edit_single_user.css') }}">
 </head>
 <body>
-<form method="POST"  action="http://localhost:8084/registrarSensorAtuador" class="formulario">
+<form method="POST"  action="http://localhost:8084/update_user" class="formulario">
 
     <h2>Editar Usuário</h2>
 
+    <input type="text" name="currentUser" id="2" value="{{ username }}" readonly>
 
     <label for="1">Novo Nome</label>
-    <input id="1" type="text" name="newUsername" placeholder="Nome:" value="{{username}}">
+    <input id="1" type="text" name="newUsername" placeholder="{{username}}">
 
     <label for="0">Nova Senha</label>
-    <input type="text" name="newPassword" id="0" placeholder="Senha:">
+    <input type="text" name="newPassword" id="0" placeholder="Senha">
 
 
 
