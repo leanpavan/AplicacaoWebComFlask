@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PJBL2</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='registrarUsuario.css') }}">
+</head>
+<body>
+    <form method="POST"  action="http://localhost:8084//" class="formulario">
+
+        <h2>Cadastrar usuario</h2>
+
+        <label for="1">Nome </label>
+        <input id="1" type="text" name="usuario" placeholder="Usuario:">
+
+        <label for="3">Senha</label>
+        <input id="3" type="password" name="senha" placeholder="senha:">
+
+
+        <input type="submit" value="Registrar usuario">
+    </form>
+</body>
+</html>
