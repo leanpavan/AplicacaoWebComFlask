@@ -11,6 +11,8 @@ users = {
     'user1': '1234',
     'user2': '12340'
 }
+sensors = {}
+atuadorDict = {}
 
 def login_required(f):
     @wraps(f)
@@ -58,8 +60,16 @@ def home():
 @app.route('/sensores')
 @login_required
 def sensores():
+    global sensors
     user = session['logged_user']
-    return render_template('sensores.html', user = user)
+    return render_template('sensores.html', user=user, sensors=sensors)
+
+@app.route('/atuadores')
+@login_required
+def atuadores():
+    global atuadorDict
+    user = session['logged_user']
+    return render_template('atuadores.html', user=user, atuadores=atuadorDict)
 
 @app.route('/edit_user')
 @login_required
@@ -126,6 +136,40 @@ def add_user():
 
         response = make_response(redirect(url_for('edit_user')))
         return response
+
+@app.route('/registrarSensor')
+@login_required
+def registrarSensor():
+    user = session['logged_user']
+    return render_template('registrarSensor.html', user=user)
+
+@app.route('/ADDsensor', methods=['POST'])
+@login_required
+def ADDsensor():
+    user = session['logged_user']
+    global sensors
+    if request.method == 'POST':
+        InputSensor = request.form['sensor']
+        sensors[InputSensor] = "-1"
+
+        return render_template('sensores.html',user=user, sensors=sensors)
+
+@app.route('/registrarAtuador')
+@login_required
+def registrarAtuador():
+    user = session['logged_user']
+    return render_template('registrarAtuador.html', user=user)
+
+@app.route('/ADDatuador', methods=['POST'])
+@login_required
+def ADDatuador():
+    user = session['logged_user']
+    global atuadorDict
+    if request.method == 'POST':
+        InputAtuador = request.form['atuador']
+        atuadorDict[InputAtuador] = "-1"
+
+        return render_template('atuadores.html', user=user, atuadores=atuadorDict)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8084, debug=True)
