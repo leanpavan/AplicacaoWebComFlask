@@ -5,5 +5,14 @@
 <div class="container">
     <h3>Pagina para sensores</h3>
 </div>
-
+<div>
+    <table>
+        <tr>
+            <th>Sensores</th>
+        </tr>
+        {% for key,value in sensors.items() %}
+        <td>{{ key }}</td>
+        {% endfor %}
+    </table>
+</div>
 {% endblock %}

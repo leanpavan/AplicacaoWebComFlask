@@ -1,0 +1,17 @@
+{% extends "template_sistema.html" %}
+
+{% block content %}
+
+
+<form method="post"  action="http://localhost:8084/ADDsensor" class="formulario">
+
+  <h2>Cadastrar Sensor</h2>
+
+  <label for="1">Nome </label>
+  <input id="1" type="text" name="sensor" placeholder="Nome:">
+
+
+  <input type="submit" value="Registrar sensor">
+</form>
+
+{% endblock %}

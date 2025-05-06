@@ -1,0 +1,18 @@
+{% extends "template_sistema.html" %}
+
+{% block content %}
+
+<div class="container">
+  <h3>Pagina para Atuadores</h3>
+</div>
+<div>
+  <table>
+    <tr>
+      <th>Atuadores</th>
+    </tr>
+    {% for key,value in atuadores.items() %}
+    <td>{{ key }}</td>
+    {% endfor %}
+  </table>
+</div>
+{% endblock %}
