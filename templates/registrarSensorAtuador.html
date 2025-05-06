@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>PJBL2</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='registrarUsuario.css') }}">
+</head>
+<body>
+<form method="POST"  action="http://localhost:8084/registrarSensorAtuador" class="formulario">
+
+  <h2>Cadastrar Sensor ou atuador</h2>
+
+
+  <label for="">Qual o tipo: </label>
+  <select name="tipo" id="0">
+    <option value="1">Atuador</option>
+    <option value="2">Sensor</option>
+  </select>
+
+  <label for="1">Nome </label>
+  <input id="1" type="text" name="nome" placeholder="Nome:">
+
+
+  <input type="submit" value="Registrar sensor atuador">
+</form>
+</body>
+</html>
