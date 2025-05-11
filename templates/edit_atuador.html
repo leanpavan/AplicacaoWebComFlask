@@ -1,0 +1,28 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Editar Atuador</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <form method="POST"  action="http://localhost:8084/update_atuador">
+
+        <h2>Editar Sensor</h2>
+        <input type="text" name="currentAtuador" id="2" value="{{ atuador }}" readonly hidden>
+
+        <div class="card">
+            <div class="card-body bg-grey">
+                <div class="mb-3">
+                    <label for="1" class="form-label">Editar Atuador</label>
+                    <input id="1" type="text" name="newAtuador" value="{{atuador}}" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Atuador</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

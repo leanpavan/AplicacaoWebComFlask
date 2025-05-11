@@ -1,10 +1,14 @@
 {% extends "template_sistema.html" %}
 
+{% block title %}
+<title>HorseCare - Home</title>
+{% endblock %}
+
 {% block content %}
 
-<div class="container">
-    <h3>Bem Vindo ao Sistema!</h3>
-    <h4>Vamos cuidar de cavalos?</h4>
+<div class="container mt-3">
+    <h3>Bem Vindo ao Sistema HorseCare, {{user}}!</h3>
+    <h4>Pronto para monitorar as baias dos cavalos?</h4>
 </div>
 
 {% endblock %}

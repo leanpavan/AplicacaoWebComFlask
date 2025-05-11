@@ -1,0 +1,28 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Sobre</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-3">
+    <h3>Sobre o projeto:</h3>
+    <div class="text-sobre">
+        <p>O HorseCare é um sistema para monitoramento de baias de cavalos, desenvolvido como projeto extensionista no curso de Ciências da Computação como parte da 
+            matéria de Experiência Criativa: Criando Soluções Computacionais, na Pontíficia Universidade Católica do Paraná (PUCPR).
+        </p>
+        <p>
+            Desenvolvido por Guilherme Arcanjo de Morais, Leandro José da Silva Pavan, Lucas da Costa Paula e Yuko Matheus Oshiro – sobre orientação do professor Joelton Deonei Gotz – o HorseCare visa ser uma ferramenta que auxilie os funcionários da fazenda PUCPR na tarefa de monitoramento de cavalos, tornando esta tarefa mais simples e rápida de ser realizada, reduzindo a necessidade de monitoramento manual constante e possibilitando uma maior dedicação a outras áreas da fazendo.
+        </p>
+        <p>O sistema opera com sensores de temperatura e ultrassonicos, coletando dados destes sensores para o monitoramento, que é feito através das páginas deste (que podem ser acessadas através da barra de menus logo acima). As informações são carregadas em tempo real no sistema, possibilitando monitoramento constante e atualizado.</p>
+        <p>Com base nos dados coletados, os atuadores entram em ação. Em nosso sistema, utilizamos 2 tipos de atuadores: LEDs (vermelho, azul e amarelo) e um Servo Motor (responsável por manter um controle das janelas da baia).</p>
+        <p>Os LEDs acendem automaticamente quando os dados de temperatura e proximidade com o cavalo são carregadas: vermelho para indicar se o cavalo na baia esta deitado, amarelo para indicar que a temperatura na baia esta muito elevada e azul para indicar que a temperatura na baia esta muito baixa. O Servo Motor age de acordo com a temperatura, se o LED amarelo ligar, o Servo abre as janelas, mas se o LED azul ligar, o Servo fecha as janelas.</p>
+        <p>Além disso, também é possível fazer o controle manual dos atuadores, ligando e desligando os LEDs de acordo com suas preferências, podendo também abrir e fechar as janelas com o Servo Motor à vontade.</p>
+        <p>Como administrador do sistema, também é possível monitorar os usuários do sistema, bem como gerenciar os sensores e atuadores, adicionando mais destes, editando-os e até mesmo os deletando do sistema.</p>
+        <p>Desta forma, o sistema é capaz de monitorar todos esses dados para a fazenda, tornando o controle das baias mais moderno e eficiênte.</p>
+        <p>Obrigado pela atenção e preferência! Agora, está pronto para monitorar essas baias?</p>
+    </div>
+</div>
+
+{% endblock %}

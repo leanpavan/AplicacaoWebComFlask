@@ -1,18 +1,68 @@
 {% extends "template_sistema.html" %}
 
+{% block title %}
+<title>HorseCare - Sensores</title>
+{% endblock %}
+
 {% block content %}
 
-<div class="container">
-    <h3>Pagina para sensores</h3>
+<div class="container title-form">
+    <h3>Sensores</h3>
+
+    {% if user == "ADM" %}
+    <button type="button" class="btn btn-primary btn-large" data-bs-toggle="modal" data-bs-target="#form_cadastro">Cadastrar +</button>
+    {% endif %}
 </div>
-<div>
-    <table>
-        <tr>
-            <th>Sensores</th>
-        </tr>
-        {% for key,value in sensors.items() %}
-        <td>{{ key }}</td>
-        {% endfor %}
+<div class="container">
+    <table class="table table-striped table-hover table-bordered table-cells">
+        <thead>
+            <tr>
+                <th scope="col" class="cell-fill">Sensores</th>
+                {% if user == "ADM" %}
+                <th scope="col">Ações</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for key,value in sensors.items() %}
+            <tr>
+                <td>{{ key }}</td>
+                {% if user == "ADM" %}
+                <td>
+                  <a href="{{ url_for('edit_sensor', sensor=key) }}" class="btn btn-primary">Editar</a>
+                  <a href="{{ url_for('delete_sensor', sensor=key) }}" class="btn btn-danger">Excluir</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+        
     </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="form_cadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="form_cadastroLabel">Cadastrar Sensor</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post"  action="http://localhost:8084/ADDsensor" class="formulario">
+                  
+                    <label for="1">Nome </label>
+                    <input id="1" type="text" name="sensor" placeholder="Nome:">
+                    
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+              <input type="submit" value="Registrar sensor" class="btn btn-primary">
+            </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
 </div>
 {% endblock %}

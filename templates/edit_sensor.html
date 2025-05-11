@@ -1,0 +1,28 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Editar Sensor</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <form method="POST"  action="http://localhost:8084/update_sensor">
+
+        <h2>Editar Sensor</h2>
+        <input type="text" name="currentSensor" id="2" value="{{ sensor }}" readonly hidden>
+
+        <div class="card">
+            <div class="card-body bg-grey">
+                <div class="mb-3">
+                    <label for="1" class="form-label">Novo Sensor</label>
+                    <input id="1" type="text" name="newSensor" value="{{sensor}}" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Sensor</button>
+            </div>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

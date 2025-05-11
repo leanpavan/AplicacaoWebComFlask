@@ -1,0 +1,15 @@
+.title-form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.table-cells {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.cell-fill {
+    width: 70%;
+}

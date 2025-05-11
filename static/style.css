@@ -1,0 +1,75 @@
+body {
+    background-color: rgb(235, 244, 247);
+}
+
+.bg-emerald {
+    background-color: #32a774;
+}
+
+.bg-grey {
+    background-color: #fafdfc;
+}
+
+.img-logo {
+    width: 60px;
+    height: 50px;
+    filter: drop-shadow(2px 1px 3px greenyellow);
+}
+
+.text-logo {
+    text-shadow: 2px 1px 3px greenyellow;
+}
+
+.img-resize {
+    width: 30%;
+    height: 40%;
+    margin-bottom: 20px;
+}
+
+.img-resize2 {
+    width: 30%;
+    height: 50%;
+    margin-bottom: 20px;
+}
+
+.img-resize3 {
+    width: 36%;
+    height: 50%;
+    padding: 20px;
+}
+
+.img {
+    text-align: center;
+    justify-content: center;
+}
+
+.img > img{
+    filter: drop-shadow(3px 1px 5px black);
+}
+
+.titulo {
+    text-align: center;
+}
+
+.valor_sensor{
+    padding: 10px;
+    text-align: center;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.text-saudavel {
+    text-shadow: 1px 1px 3px rgb(71, 255, 47);
+}
+
+.text-cuidado {
+    text-shadow: 1px 1px 3px rgb(255, 78, 47);
+}
+
+.text-frio {
+    text-shadow: 1px 1px 3px rgb(47, 206, 255);
+}
+
+.text-sobre {
+    text-align: justify;
+}

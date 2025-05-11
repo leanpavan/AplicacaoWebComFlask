@@ -1,0 +1,111 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Comandos Remotos</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <div class="container title-form">
+    <h3>Comandos Remotos</h3>
+
+    <button type="button" class="btn btn-primary btn-large" onclick="automatico()">Modo Automatico</button>
+</div>
+
+    <div class="row">
+    {% for key,value in atuadores.items() %}
+        <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
+            <div class="card">
+                <div class="card-body bg-grey">
+                    <h4 class="card-title titulo"> {{key}} </h4>
+                    
+                    <div class="switch__container">
+                        <input onclick='handleClick(this, "{{key}}");' id="{{key}}" class="switch switch--shadow" type="checkbox" {% if value %}checked{% endif %}>
+                        <label for="{{key}}"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    {% endfor %}
+    </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+
+<script>
+    function handleClick(checkbox, atuadorId) {
+        const isChecked = checkbox.checked;
+        var topic = "";
+        if (atuadorId == "LED_Vermelho" || atuadorId == "LED_Amarelo" || atuadorId == "LED_Azul") {
+            topic = "LEDCAVALO"
+        } else if (atuadorId == "Servo_Motor") {
+            topic = "Motor"
+        }
+
+        var data = "";
+        if (checkbox.checked){
+            if (atuadorId == "LED_Vermelho") {
+                data = "vermelho"
+            } else if (atuadorId == "LED_Amarelo") {
+                data = "amarelo"
+            } else if (atuadorId == "LED_Azul") {
+                data = "azul"
+            } else if (atuadorId == "Servo_Motor") {
+                data = "abrir"
+            }
+        }else{
+            if (atuadorId == "LED_Vermelho") {
+                data = "vermelho_off"
+            } else if (atuadorId == "LED_Amarelo") {
+                data = "amarelo_off"
+            } else if (atuadorId == "LED_Azul") {
+                data = "azul_off"
+            } else if (atuadorId == "Servo_Motor") {
+                data = "fechar"
+            }
+        }
+
+        $.ajax({
+            url: "{{url_for('publish_message')}}",
+            contentType: 'application/json;charset=UTF-8',
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+                message: data,
+                topic: topic
+            }),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+
+<script>
+    function automatico() {
+        var topic = "Motor";
+        data = "auto"
+
+        $.ajax({
+            url: "{{ url_for('publish_message') }}",
+            contentType: 'application/json;charset=UTF-8',
+            cache: false,
+            method: 'POST',
+            dataType: 'json',
+            data: JSON.stringify({
+                message: data,
+                topic: topic
+            }),
+            success: function(data) {
+                console.log(data);
+            }
+        });
+    }
+</script>
+
+{% endblock %}

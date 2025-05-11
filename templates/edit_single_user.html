@@ -1,26 +1,32 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>PJBL2</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='edit_single_user.css') }}">
-</head>
-<body>
-<form method="POST"  action="http://localhost:8084/update_user" class="formulario">
+{% extends "template_sistema.html" %}
 
-    <h2>Editar Usuário</h2>
+{% block title %}
+<title>HorseCare - Editar Usuário</title>
+{% endblock %}
 
-    <input type="text" name="currentUser" id="2" value="{{ username }}" readonly>
+{% block content %}
 
-    <label for="1">Novo Nome</label>
-    <input id="1" type="text" name="newUsername" placeholder="{{username}}">
+<div class="container mt-4">
+    <form method="POST"  action="http://localhost:8084/update_user">
 
-    <label for="0">Nova Senha</label>
-    <input type="text" name="newPassword" id="0" placeholder="Senha">
+        <h2>Editar Usuário</h2>
+        <input type="text" name="currentUser" id="2" value="{{ username }}" readonly hidden>
 
+        <div class="card">
+            <div class="card-body bg-grey">
+                <div class="mb-3">
+                    <label for="1" class="form-label">Novo Nome</label>
+                    <input id="1" type="text" name="newUsername" value="{{username}}" class="form-control">
+                </div>
+                <div class="mb-3">
+                    <label for="0" class="form-label">Nova Senha</label>
+                    <input type="password" name="newPassword" id="0" placeholder="Senha" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary">Atualizar Usuário</button>
+            </div>
+        </div>
 
+    </form>
+</div>
 
-    <input type="submit" value="Atualizar Usuário">
-</form>
-</body>
-</html>
+{% endblock %}

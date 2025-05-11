@@ -1,15 +1,26 @@
 html, body {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
-
     height: 100%;
     margin: 0;
-
     display: flex;
     justify-content: center;
     align-items: center;
+    background-color: #fafdfc;
 }
 
+.header_login {
+    display: flex;
+    justify-content: space-between;
+}
 
+.header_login p {
+    margin-top: 15px;
+}
+
+.logo_login {
+    width: 60px;
+    height: 60px;
+}
 
 .form-login {
     padding: 50px;
