@@ -1,3 +1,4 @@
+from controllers.app_controller import create_app
 from flask import Flask, render_template, request, flash, redirect, url_for, make_response, session, jsonify
 from datetime import datetime, timedelta
 import secrets
@@ -185,7 +186,7 @@ def add_user():
         users[username] = password
 
         response = make_response(redirect(url_for('user')))
-        return response
+    return response
 
 @app.route('/ADDsensor', methods=['POST'])
 @login_required
@@ -338,4 +339,4 @@ def handle_mqtt_message(client, userdata, message):
         sensors['Ultrassonico'] = js["valor"]
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8084, debug=True)
+    app.run(host="0.0.0.0", port=8084, debug=False)
