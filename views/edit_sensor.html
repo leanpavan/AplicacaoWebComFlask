@@ -1,0 +1,47 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Editar Sensor</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+    <h2>Editar Sensor</h2>
+
+    <div class="card">
+        <div class="card-body bg-grey">
+            {%for sensor in sensor%}
+                    <form action = "http://localhost:8084/update_sensor" method = "post">
+                        <label>id:</label>
+                        <p><input class="form-control" type = "text" name = "id" value= "{{sensor.id}}" readonly/></p>
+
+                        <label>Nome:</label>
+                        <p><input class="form-control" type = "text" name = "name" value= "{{sensor.name}}" required/></p>
+
+                        <label>Marca:</label>
+                        <p><input class="form-control" type = "text" name = "brand" value='{{sensor.brand}}' required/></p>
+
+                        <label>Modelo:</label>
+                        <p><input class="form-control" type = "text" name = "model" value='{{sensor.model}}' required/></p>
+
+                        <label>Unidade de Medida:</label>
+                        <p><input class="form-control" type = "text" name = "unit" value='{{sensor.unit}}' required/></p>
+
+                        <label>Tópico MQTT:</label>
+                        <p><input class="form-control" type = "text" name = "topic" value='{{sensor.topic}}' required/></p>
+
+                        <div>
+                            <input type="checkbox" id="is_active" name="is_active" checked />
+                            <label for="is_active">Ativo?</label>
+                        </div>
+                {%endfor%}
+                    <button type = "submit" class="btn btn-primary mt-3">Atualizar Sensor</button>
+                </form>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

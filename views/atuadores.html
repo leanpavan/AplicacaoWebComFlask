@@ -1,0 +1,107 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Atuadores</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container title-form">
+  <h3>Atuadores</h3>
+
+  {% if user.is_authenticated and (user.has_role('Adm')) %}
+  <button type="button" class="btn btn-primary btn-large" data-bs-toggle="modal" data-bs-target="#form_cadastro">Cadastrar +</button>
+  {% endif %}
+</div>
+
+<div class="container">
+  {% if atuadores|length> 0 %}
+  <table class="table table-striped table-hover table-bordered table-cells">
+    <thead>
+    <tr>
+      <th scope="col">Atuadores</th>
+      <th scope="col">Marca</th>
+      <th scope="col">Modelo</th>
+      <th scope="col">Topico</th>
+      <th scope="col">Status</th>
+
+      {% if user.is_authenticated and (user.has_role('Adm')) %}
+      <th scope="col">Ações</th>
+      {% endif %}
+    </tr>
+    </thead>
+    <tbody>
+      {% for atuador in atuadores %}
+      <tr>
+        <td>{{ atuador.name }}</td>
+        <td>{{ atuador.brand }}</td>
+        <td>{{ atuador.model }}</td>
+        <td>{{ atuador.topic }}</td>
+
+        {% if atuador.is_active == true %}
+          <td>Ativo</td>
+        {% else %}
+          <td>Desativado</td>
+        {% endif %}
+
+        {% if user.is_authenticated and (user.has_role('Adm')) %}
+        <td>
+          <a href="/edit_actuator?id={{atuador.id}}" class="btn btn-primary">Editar</a>
+          <a href="/del_actuator?id={{atuador.id}}" class="btn btn-danger">Excluir</a>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% else %}
+
+  <h4>Ainda não há atuadores registrados!</h4>
+
+  {% endif %}
+
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="form_cadastro" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="form_cadastroLabel">Cadastrar Atuador</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <form method="post"  action="http://localhost:8084/add_actuator" class="formulario">
+
+            <label for="1">Nome </label>
+            <input id="1" type="text" name="name" placeholder="Nome do atuador"> <br>
+
+            <label for="1">Marca </label>
+            <input id="1" type="text" name="brand" placeholder="Marca do atuador"> <br>
+
+            <label for="1">Modelo </label>
+            <input id="1" type="text" name="model" placeholder="Modelo do atuador"> <br>
+
+            <label for="1">Unidade </label>
+            <input id="1" type="text" name="unit" placeholder="Unidade de medida"> <br>
+
+            <label for="1">Tópico MQTT </label>
+            <input id="1" type="text" name="topic" placeholder="Topico do MQTT"> <br>
+
+            <div>
+              <input type="checkbox" id="is_active" name="is_active" checked />
+              <label for="is_active">Ativo?</label>
+            </div>
+              
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <input type="submit" value="Registrar atuador" class="btn btn-primary">
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

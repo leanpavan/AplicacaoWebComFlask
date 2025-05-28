@@ -1,0 +1,46 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Editar Usuário</title>
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+
+        <h2>Editar Usuário</h2>
+        <div class="card">
+        <div class="card-body bg-grey">
+            {%for usuario in username%}
+                    <form action = "http://localhost:8084/update_user" method = "post">
+                        <label>id:</label>
+                        <p><input class="form-control" type = "text" name = "id" value= "{{usuario.id}}" readonly/></p>
+
+                        <label>Nome:</label>
+                        <p><input class="form-control" type = "text" name = "name" value= "{{usuario.name}}" required/></p>
+
+                        <label>E-mail:</label>
+                        <p><input class="form-control" type = "text" name = "email" value= "{{usuario.email}}" required/></p>
+
+                        <label>Senha:</label>
+                        <p><input class="form-control" type = "password" name = "password" placeholder="Senha nova" required/></p>
+
+                        <select name="role_type_" class="Input">
+                            {% for role in roles %}
+                                <option>{{role.name}}</option>
+                            {% endfor %}
+                        </select>
+
+                        <div>
+                            <input type="checkbox" id="is_active" name="is_active" checked />
+                            <label for="is_active">Ativo?</label>
+                        </div>
+
+                {%endfor%}
+                    <button type = "submit" class="btn btn-primary mt-3">Atualizar Usuário</button>
+                </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

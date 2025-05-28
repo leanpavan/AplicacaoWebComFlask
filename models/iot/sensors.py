@@ -9,17 +9,26 @@ class Sensor(db.Model):
     topic = db.Column(db.String(50))
 
     def save_sensor(name, brand, model, topic, unit, is_active):
-        device = Device(name = name, brand = brand,
-                        model = model, is_active = is_active)
-        sensor = Sensor(devices_id = device.id, unit = unit, topic = topic)
+        device = Device(
+            name = name,
+            brand = brand,
+            model = model,
+            is_active = is_active
+        )
+
+        sensor = Sensor(
+            devices_id = device.id,
+            unit = unit,
+            topic = topic
+        )
 
         device.sensors.append(sensor)
         db.session.add(device)
         db.session.commit()
 
 
-        def get_single_sensor(id):
-            sensor = Sensor.query.filter(Sensor.devices_id == id).first()
+    def get_single_sensor(id):
+        sensor = Sensor.query.filter(Sensor.devices_id == id).first()
         if sensor is not None:
             sensor = Sensor.query.filter(Sensor.devices_id == id) \
                 .join(Device).add_columns(Device.id, Device.name, Device.brand,

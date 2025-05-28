@@ -1,0 +1,63 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Tempo Real</title>
+<meta http-equiv="refresh" content="5">
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-4">
+    <h3>Dados dos Sensores em Tempo Real</h3>
+    <div class="row">
+    {% for key,value in sensores.items() %}
+        <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
+            <div class="card">
+            <div class="card-body bg-grey">
+                <h4 class="card-title titulo"> {{key}} </h4>
+
+                {% if key == "Temperatura" %}
+                <h5 class="card-text valor_sensor {% if value < 5 %} text-frio {% elif value > 25 %} text-danger {% else %} text-saudavel {% endif %}"> {{value}} ºC </h5>
+
+                <div class="img">
+                    <img src="../static/img/temperature.png" class="img-fluid img-resize2">
+                    <h5 class="card-text mt-3">
+                        {% if value < 5 %}
+                            Status: Muito frio!
+                        {% elif value > 25 %}
+                            Status: Muito quente!
+                        {% else %}
+                            Status: Normal
+                        {% endif %}
+                    </h5>
+                </div>
+                
+                {% elif key == "Ultrassonico" %}
+                <h5 class="card-text valor_sensor {% if value >= 25  %} text-cuidado {% else %} text-saudavel {% endif %}"> {{value}} cm </h5>
+
+                    {% if value >= 25  %}
+                    <div class="img">
+                        <img src="../static/img/horse_laying.png" class="img-fluid img-resize3">
+                        <h5 class="card-text">Status: Cavalo deitado!</h5>
+                    </div>
+                    
+                    {% else %}
+                    <div class="img">
+                        <img src="../static/img/horse_standing.png" class="img-fluid img-resize">
+                        <h5 class="card-text mt-3">Status: Cavalo de pé!</h5>
+                    </div>
+                    {% endif %}
+
+                {% else %}
+                <h5 class="card-text valor_sensor"> {{value}}</h5>
+                {% endif %}
+
+            </div>
+            </div>
+        </div>
+    
+    {% endfor %}
+    </div>
+</div>
+
+{% endblock %}

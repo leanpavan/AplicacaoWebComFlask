@@ -1,0 +1,75 @@
+{% extends "template_sistema.html" %}
+
+{% block title %}
+<title>HorseCare - Usuários</title>
+{% endblock %}
+
+{% block content %}
+<div class="container title-form">
+    <h3>Usuários</h3>
+    <button type="button" class="btn btn-primary btn-large" data-bs-toggle="modal" data-bs-target="#form_cadastro_user">Cadastrar +</button>
+</div>
+<div class="container">
+    <table class="table table-bordered table-hover table-striped table-cells">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>E-mail</th>
+            <th>Role</th>
+            <th>Ações</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for usuario in users %}
+        <tr>
+            <td>{{usuario.name}}</td>
+            <td>{{usuario.email}}</td>
+            <td>{{usuario.roles[0].name if usuario.roles else 'Sem role'}}</td>
+            <td class="action-buttons">
+                <a href="/edit_user?id={{usuario.id}}" class="btn btn-primary">Editar</a>
+                <a href="/del_user?id={{usuario.id}}" class="btn btn-danger">Excluir</a>
+            </td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Cadastrar -->
+<div class="modal fade" id="form_cadastro_user" tabindex="-1" aria-labelledby="form_cadastro_userLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="form_cadastroLabel">Cadastrar Usuário</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form method="post"  action="http://localhost:8084/add_user" class="formulario">
+              
+                <label for="name">Nome</label>
+                <input id="name" type="text" name="name" placeholder="Nome do atuador"> <br>
+
+                <label for="email">E-mail</label>
+                <input id="email" type="text" name="email" placeholder="Nome do atuador"> <br>
+
+                <label for="password">Senha</label>
+                <input id="password" type="text" name="password" placeholder="Nome do atuador"> <br>
+
+                <select name="role_type_" class="Input">
+                    {% for role in roles %}
+                        <option>{{role.name}}</option>
+                    {% endfor %}
+                </select>
+                
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <input type="submit" value="Registrar Usuário" class="btn btn-primary">
+        </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+{% endblock %}
