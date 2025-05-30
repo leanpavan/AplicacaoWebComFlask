@@ -14,22 +14,26 @@
 </div>
 
     <div class="row">
-    {% for key,value in atuadores.items() %}
-        <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
-            <div class="card">
-                <div class="card-body bg-grey">
-                    <h4 class="card-title titulo"> {{key}} </h4>
-                    
-                    <div class="switch__container">
-                        <input onclick='handleClick(this, "{{key}}");' id="{{key}}" class="switch switch--shadow" type="checkbox" {% if value %}checked{% endif %}>
-                        <label for="{{key}}"></label>
+    {% if atuadores|length> 0 %}
+        {% for atuador in atuadores %}
+            <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
+                <div class="card">
+                    <div class="card-body bg-grey">
+                        <h4 class="card-title titulo"> {{atuador.name}} </h4>
+                        
+                        <div class="switch__container">
+                            <input onclick='handleClick(this, "{{atuador.name}}");' id="{{atuador.name}}" class="switch switch--shadow" type="checkbox" {% if value %}checked{% endif %}>
+                            <label for="{{atuador.name}}"></label>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    
-    {% endfor %}
+        
+        {% endfor %}
     </div>
+    {% else %}
+        <h4>Não há atuadores registrados para realizar comandos!</h4>
+    {% endif %}
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.1.0/socket.io.min.js"></script>
@@ -107,5 +111,23 @@
         });
     }
 </script>
+
+
+<script>
+        $(document).ready(function () {
+            var table = $('#view_sen').DataTable( {
+                scrollY:        "500px",
+                scrollX:        true,
+                scrollCollapse: true,
+                paging:         true,
+                fixedColumns:   {
+                    heightMatch: 'none'
+                },
+                language: {
+                    url:"static/js/pt_br.json"
+                }
+            } );
+        });
+    </script>
 
 {% endblock %}

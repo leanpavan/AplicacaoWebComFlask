@@ -73,20 +73,30 @@
       <div class="modal-body">
           <form method="post"  action="http://localhost:8084/add_actuator" class="formulario">
 
-            <label for="1">Nome </label>
-            <input id="1" type="text" name="name" placeholder="Nome do atuador"> <br>
+            <div class="mb-3">
+              <label for="name">Nome </label>
+              <input id="name" type="text" name="name" placeholder="Nome do atuador">
+            </div>
 
-            <label for="1">Marca </label>
-            <input id="1" type="text" name="brand" placeholder="Marca do atuador"> <br>
+            <div class="mb-3">
+              <label for="brand">Marca </label>
+              <input id="brand" type="text" name="brand" placeholder="Marca do atuador">
+            </div>
 
-            <label for="1">Modelo </label>
-            <input id="1" type="text" name="model" placeholder="Modelo do atuador"> <br>
+            <div class="mb-3">
+              <label for="model">Modelo </label>
+              <input id="model" type="text" name="model" placeholder="Modelo do atuador">
+            </div>
 
-            <label for="1">Unidade </label>
-            <input id="1" type="text" name="unit" placeholder="Unidade de medida"> <br>
-
-            <label for="1">Tópico MQTT </label>
-            <input id="1" type="text" name="topic" placeholder="Topico do MQTT"> <br>
+            <div class="mb-3">
+              <label for="unit">Unidade </label>
+              <input id="unit" type="text" name="unit" placeholder="Unidade de medida">
+            </div>
+            
+            <div class="mb-3">
+              <label for="topic">Tópico MQTT </label>
+              <input id="topic" type="text" name="topic" placeholder="Topico do MQTT">
+            </div>
 
             <div>
               <input type="checkbox" id="is_active" name="is_active" checked />

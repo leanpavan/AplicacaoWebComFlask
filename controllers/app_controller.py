@@ -2,6 +2,9 @@ from flask import Flask, render_template, request, session, redirect, url_for, m
 from models.db import db, instance
 from models.user.user import User
 from models.user.role import Role
+from models.iot.read import Read
+from models.iot.write import Write
+from models.iot.sensors import Sensor
 
 from datetime import datetime, timedelta
 import secrets
@@ -15,8 +18,13 @@ from flask_socketio import SocketIO
 from controllers.sensors_controller import sensor_
 from controllers.user_controller import user_
 from controllers.actuators_controller import actuator_
+from controllers.read_controller import read
+from controllers.write_controller import write
 
 import json
+
+temperatura = 0
+ultrassonico = 0
 
 def create_app():
     app = Flask(__name__,
@@ -40,9 +48,13 @@ def create_app():
 
     topic_subscribe = "projeto_cavalo" # Topico do projeto
 
-    app.register_blueprint(sensor_, url_prefix='/') # Registra Blueprint dos sensors
+    # Importação de Blueprints
+    app.register_blueprint(sensor_, url_prefix='/')
     app.register_blueprint(user_, url_prefix='/')
     app.register_blueprint(actuator_, url_prefix='/')
+    app.register_blueprint(read, url_prefix='/')
+    app.register_blueprint(write, url_prefix='/')
+
 
     db.init_app(app)
 
@@ -74,26 +86,26 @@ def create_app():
     @login_required
     def sobre():
         return render_template('sobre.html', user = current_user)
-
+    
     @app.route('/tempo_real')
     @login_required
     @roles_accepted('Adm', 'Estatico')
     def tempo_real():
-        global sensors
-
-        return render_template('tempo_real.html', user=current_user, sensores=sensors)
-
-    @app.route('/comandos')
-    @login_required
-    @roles_accepted('Adm', 'Operador')
-    def comandos():
-        global atuadorDict
-        return render_template('comandos.html', user=current_user, atuadores=atuadorDict)
+        global temperatura, ultrassonico
+        sensors = Sensor.get_sensors()
+        return render_template('tempo_real.html', user=current_user, sensores=sensors, temperatura = temperatura, ultrassonico=ultrassonico)
 
     @app.route('/publish_message', methods=['GET','POST'])
     def publish_message():
         request_data = request.get_json()
         publish_result = mqtt_client.publish(request_data['topic'], request_data['message'])
+
+        try:
+            with app.app_context():
+                Write.add_write(request_data['topic'],request_data['message'])
+        except Exception as e:
+            print(f'erro: {str(e)}')
+
         return jsonify(publish_result)
 
     # Conexões mqtt
@@ -111,13 +123,20 @@ def create_app():
 
     @mqtt_client.on_message()
     def handle_mqtt_message(client, userdata, message):
-        global sensors
-        print(message.payload.decode())
-        js = json.loads(message.payload.decode())
-        if(js["sensor"]=="projeto_cavalo/temperatura"):
-            sensors['Temperatura'] = js["valor"]
-        elif(js["sensor"]=="projeto_cavalo/ultrassonico"):
-            sensors['Ultrassonico'] = js["valor"]
+        global temperatura, ultrassonico
+        if (message.topic == topic_subscribe):
+            print(message.payload.decode())
+            js = json.loads(message.payload.decode())
+            if(js["sensor"]=="projeto_cavalo/temperatura"):
+                temperatura = js["valor"]
+            elif(js["sensor"]=="projeto_cavalo/ultrassonico"):
+                ultrassonico = js["valor"]
+
+            try:
+                with app.app_context():
+                    Read.save_read(js["sensor"], js["valor"])
+            except Exception as e:
+                print(f'erro: {str(e)}')
 
 
     return app

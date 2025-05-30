@@ -46,14 +46,19 @@
         <div class="modal-body">
             <form method="post"  action="http://localhost:8084/add_user" class="formulario">
               
-                <label for="name">Nome</label>
-                <input id="name" type="text" name="name" placeholder="Nome do atuador"> <br>
+                <div class="mb-3">
+                  <label for="name">Nome</label>
+                  <input id="name" type="text" name="name" placeholder="Nome do atuador">
+                </div>
+                <div class="mb-3">
+                  <label for="email">E-mail</label>
+                  <input id="email" type="text" name="email" placeholder="Nome do atuador">
+                </div>
 
-                <label for="email">E-mail</label>
-                <input id="email" type="text" name="email" placeholder="Nome do atuador"> <br>
-
-                <label for="password">Senha</label>
-                <input id="password" type="text" name="password" placeholder="Nome do atuador"> <br>
+                <div class="mb-3">
+                  <label for="password">Senha</label>
+                  <input id="password" type="text" name="password" placeholder="Nome do atuador">
+                </div>
 
                 <select name="role_type_" class="Input">
                     {% for role in roles %}

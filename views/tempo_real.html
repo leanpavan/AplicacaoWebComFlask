@@ -10,21 +10,21 @@
 <div class="container mt-4">
     <h3>Dados dos Sensores em Tempo Real</h3>
     <div class="row">
-    {% for key,value in sensores.items() %}
+    {% for sensor in sensores %}
         <div class="col-sm-6 mb-3 mb-sm-0 mt-4">
             <div class="card">
             <div class="card-body bg-grey">
-                <h4 class="card-title titulo"> {{key}} </h4>
+                <h4 class="card-title titulo"> {{sensor.name}} </h4>
 
-                {% if key == "Temperatura" %}
-                <h5 class="card-text valor_sensor {% if value < 5 %} text-frio {% elif value > 25 %} text-danger {% else %} text-saudavel {% endif %}"> {{value}} ºC </h5>
+                {% if sensor.name == "Temperatura" %}
+                <h5 class="card-text valor_sensor {% if temperatura < 5 %} text-frio {% elif temperatura > 25 %} text-danger {% else %} text-saudavel {% endif %}"> {{temperatura}} ºC </h5>
 
                 <div class="img">
                     <img src="../static/img/temperature.png" class="img-fluid img-resize2">
                     <h5 class="card-text mt-3">
-                        {% if value < 5 %}
+                        {% if temperatura < 5 %}
                             Status: Muito frio!
-                        {% elif value > 25 %}
+                        {% elif temperatura > 25 %}
                             Status: Muito quente!
                         {% else %}
                             Status: Normal
@@ -32,10 +32,10 @@
                     </h5>
                 </div>
                 
-                {% elif key == "Ultrassonico" %}
-                <h5 class="card-text valor_sensor {% if value >= 25  %} text-cuidado {% else %} text-saudavel {% endif %}"> {{value}} cm </h5>
+                {% elif sensor.name == "Ultrassonico" %}
+                <h5 class="card-text valor_sensor {% if ultrassonico >= 25  %} text-cuidado {% else %} text-saudavel {% endif %}"> {{ultrassonico}} cm </h5>
 
-                    {% if value >= 25  %}
+                    {% if ultrassonico >= 25  %}
                     <div class="img">
                         <img src="../static/img/horse_laying.png" class="img-fluid img-resize3">
                         <h5 class="card-text">Status: Cavalo deitado!</h5>
@@ -49,7 +49,7 @@
                     {% endif %}
 
                 {% else %}
-                <h5 class="card-text valor_sensor"> {{value}}</h5>
+                <h5 class="card-text valor_sensor"> {{ultrassonico}}</h5>
                 {% endif %}
 
             </div>

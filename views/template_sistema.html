@@ -55,13 +55,37 @@
                     <a class="nav-link" href="/atuadores">Atuadores</a>
                   </li>
 
+                  {% if user.is_authenticated and (user.has_role('Adm') or user.has_role('Estatico')) %}
+
                   <li class="nav-item">
                     <a class="nav-link" href="/tempo_real">Visualizar Dados</a>
                   </li>
+
+                  {% endif %}
                   
+                  {% if user.is_authenticated and (user.has_role('Adm') or user.has_role('Operador')) %}
+
                   <li class="nav-item">
                     <a class="nav-link" href="/comandos">Comandos Remotos</a>
                   </li>
+
+                  {% endif %}
+
+                  {% if user.is_authenticated and (user.has_role('Adm') or user.has_role('Estatico')) %}
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/historico_sensor">Histórico de Sensores</a>
+                  </li>
+
+                  {% endif %}
+
+                  {% if user.is_authenticated and (user.has_role('Adm') or user.has_role('Operador')) %}
+
+                  <li class="nav-item">
+                    <a class="nav-link" href="/historico_atuador">Histórico de Atuadores</a>
+                  </li>
+
+                  {% endif %}
 
                   <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">

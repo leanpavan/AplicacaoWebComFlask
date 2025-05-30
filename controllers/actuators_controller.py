@@ -55,3 +55,10 @@ def del_actuator():
     actuators = Actuator.delete_actuator(id)
 
     return render_template("atuadores.html", atuadores = actuators, user = current_user)
+
+@actuator_.route('/comandos')
+@login_required
+@roles_accepted('Adm', 'Operador')
+def comandos():
+    actuators = Actuator.get_actuators()
+    return render_template('comandos.html', user=current_user, atuadores=actuators)
