@@ -58,7 +58,6 @@ def create_app():
 
     db.init_app(app)
 
-
     # Inicialização do LoginManager do flask_login, para autenticação de usuario
     login_manager = LoginManager()
     login_manager.init_app(app)

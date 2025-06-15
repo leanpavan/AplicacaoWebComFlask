@@ -60,7 +60,8 @@
                   <input id="password" type="text" name="password" placeholder="Nome do atuador">
                 </div>
 
-                <select name="role_type_" class="Input">
+                <label for="role_type_">Role</label>
+                <select id="role_type_" name="role_type_" class="Input">
                     {% for role in roles %}
                         <option>{{role.name}}</option>
                     {% endfor %}

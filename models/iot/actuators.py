@@ -26,6 +26,15 @@ class Actuator(db.Model):
         db.session.add(device)
         db.session.commit()
 
+    def get_actuators():
+        actuators = Actuator.query.join(Device, Device.id == Actuator.devices_id ) \
+            .add_columns(Device.id, Device.name,
+                         Device.brand, Device.model,
+                         Device.is_active, Actuator.topic,
+                         Actuator.unit).all()
+
+        return actuators
+
     def get_single_actuator(id):
         actuator = Actuator.query.filter(Actuator.devices_id == id).first()
         if actuator is not None:
@@ -52,15 +61,6 @@ class Actuator(db.Model):
             return Actuator.get_actuators()
         
         return None
-    
-    def get_actuators():
-        actuators = Actuator.query.join(Device, Device.id == Actuator.devices_id ) \
-            .add_columns(Device.id, Device.name,
-                         Device.brand, Device.model,
-                         Device.is_active, Actuator.topic,
-                         Actuator.unit).all()
-
-        return actuators
     
     def delete_actuator(id):
         device = Device.query.filter(Device.id == id).first()

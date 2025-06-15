@@ -1,6 +1,6 @@
 from flask import Flask
 from models import *
-from services.inicializar_dado import Inicializar
+from utils.inicializar_dado import Inicializar
 
 def create_db(app:Flask):
     with app.app_context():

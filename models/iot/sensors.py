@@ -27,6 +27,15 @@ class Sensor(db.Model):
         db.session.commit()
 
 
+    def get_sensors():
+        sensors = Sensor.query.join(Device, Device.id == Sensor.devices_id ) \
+            .add_columns(Device.id, Device.name,
+                         Device.brand, Device.model,
+                         Device.is_active, Sensor.topic,
+                         Sensor.unit).all()
+
+        return sensors
+
     def get_single_sensor(id):
         sensor = Sensor.query.filter(Sensor.devices_id == id).first()
         if sensor is not None:
@@ -51,15 +60,6 @@ class Sensor(db.Model):
             db.session.commit()
             return Sensor.get_sensors()
         return None
-
-    def get_sensors():
-        sensors = Sensor.query.join(Device, Device.id == Sensor.devices_id ) \
-            .add_columns(Device.id, Device.name,
-                         Device.brand, Device.model,
-                         Device.is_active, Sensor.topic,
-                         Sensor.unit).all()
-
-        return sensors
 
     def delete_sensor(id):
         device = Device.query.filter(Device.id == id).first()
